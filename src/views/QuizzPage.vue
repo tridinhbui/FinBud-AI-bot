@@ -2,18 +2,21 @@
   <div class="quiz-container">
     <header>
       <h1>Keyword-Based Quiz</h1>
-      <input type="text" v-model="keywords" placeholder="Enter keywords" />
+      <input type="text" v-model="keywords" placeholder="Enter finance-related keywords" />
       <button @click="generateQuiz">Generate Quiz</button>
     </header>
     <div v-if="question" class="quiz-content">
       <div class="question">
-        <h2>{{ question.text }}</h2>
+        <h2>{{ question.question }}</h2>
       </div>
       <div class="answers">
         <button
           v-for="(answer, index) in question.answers"
           :key="index"
-          :class="{'correct': selectedAnswer === index && answer.correct, 'incorrect': selectedAnswer === index && !answer.correct}"
+          :class="{
+            correct: selectedAnswer === index && answer.correct,
+            incorrect: selectedAnswer === index && !answer.correct
+          }"
           @click="checkAnswer(index)"
         >
           {{ answer.text }}
@@ -39,6 +42,7 @@ export default {
     async generateQuiz() {
       try {
         const response = await axios.post('/api/generate-quiz', { keywords: this.keywords });
+        console.log('Quiz Question:', response.data);
         this.question = response.data;
         this.selectedAnswer = null;
       } catch (error) {
