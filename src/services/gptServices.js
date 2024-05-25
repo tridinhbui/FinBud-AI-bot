@@ -49,7 +49,7 @@ export async function gptAPICall(stockSymbol) {
  */
 export async function gptAPICallDefine(str) {
   try {
-    const prompt = `Define ${str}.`;
+    const prompt = `Explain ${str} to me as if I'm 15.`;
 
     // Now, call the GPT API with the prompt
     const OPENAI_API_KEY = "sk-proj-CEwo8ToEoICRHxYFos29T3BlbkFJgEx01EqwIWZ0I1LZC6SH";
